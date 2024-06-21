@@ -13,7 +13,12 @@ import axios from 'axios';
 import { toast } from 'react-toastify';
 
 const AuthForm = () => {
+
+
+
+
   const [isSignUp, setIsSignUp] = useState(true);
+
 
   const form = useForm();
   const router = useRouter();

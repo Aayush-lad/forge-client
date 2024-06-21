@@ -10,7 +10,7 @@ const Header = ({openSide,setOpen,children}) => {
   console.log(openSide)
   return (
     <div className={`flex  shadow-md p-3 ${openSide ?"justify-end":"justify-between"} items-center 
-    `} >
+    z-100`} >
         {
         !openSide 
         &&(

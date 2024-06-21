@@ -1,22 +1,30 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import Modal from "@/components/ui/Modal";
 import Image from "next/image";
 import axios from "axios";
 import { toast } from "react-toastify";
 import Select from "react-select";
+import { useForm,Controller } from "react-hook-form";
+import {
+  Form,
+  FormMessage,
+} from "@/components/ui/form"
 
-const Welcome = ({ step, setStep }) => {
+
+const Welcome = ({ step, setStep,closeModal }) => {
   const [orgId, setOrgId] = useState(null);
   const [members, setMembers] = useState([]);
   const [selectedMembers, setSelectedMembers] = useState([]);
   const [name, setName] = useState("");
+  const form = useForm();
+  const { register, handleSubmit, control ,reset, formState: { errors } } = form
+  const [teams, setTeams] = useState([]);
 
   useEffect(() => {
     const fetchMembers = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:5000/organization/66719d64dffe19377daa227e/members"
+          `http://localhost:5000/organization/${orgId}/members`
         );
         console.log(response);
         const memberOptions = response.data.map((member) => ({
@@ -29,8 +37,30 @@ const Welcome = ({ step, setStep }) => {
       }
     };
 
+
+    // fetch teams
+
+    const fetchTeams = async () => {
+      try {
+        const response = await axios.get(`http://localhost:5000/team/${orgId}/teams`);
+        console.log(response);
+        const teamOptions = response.data.map(t => ({
+          value: t._id,
+          label: t.name??"default"
+        }));
+        setTeams(teamOptions);
+      } catch (error) {
+        console.error('Error fetching teams:', error);
+      }
+    };
+    console.log(step);
+    if(orgId){
+      if(step==3)
     fetchMembers();
-  }, []);
+  if(step==4)
+    fetchTeams();
+    }
+  }, [orgId,step]);
 
   const handleStep1 = async (e) => {
     e.preventDefault();
@@ -97,15 +127,44 @@ const Welcome = ({ step, setStep }) => {
   const handleCreateTeam = async (e) => {
 
     try {
-      const response = await axios.post("/api/teams", {
+      const organizationId = orgId;
+      const response = await axios.post("http://localhost:5000/team/create", {
         name,
         organizationId,
         memberIds: selectedMembers.map((member) => member.value),
       });
-      console.log("Team created:", response.data);
+      setStep(4);
       toast.success(response.data.message);
+      
     } catch (error) {
       console.error("Error creating team:", error);
+    }
+  };
+
+
+  const handleStep4 = async (data) => {
+    const { name, description, startDate, endDate, status, selectedTeams } = data;
+
+    try {
+      const response = await axios.post('http://localhost:5000/project/create', {
+        name,
+        description,
+        startDate,
+        endDate,
+        status,
+        organizationId:orgId,
+        teamId: selectedTeams.map(team => team.value),
+      });
+
+      console.log('Project created:', response.data);
+      // Reset form after submission
+
+      toast.success(response.data.message);
+      reset();
+      // Redirect or show success message
+      closeModal()
+    } catch (error) {
+      console.error('Error creating project:', error);
     }
   };
 
@@ -270,28 +329,67 @@ const Welcome = ({ step, setStep }) => {
         <div className="flex">
           <div className="p-4">
             <h1 className="text-2xl font-bold mb-4">
-              Welcome to your dashboard
+              Lets Create your First Project
             </h1>
             <p className="mb-4">
-              Just a few steps to go!!<br></br>
-              You can create an organisation to get started.
+              You are almost done !!
             </p>
-            <form className="flex flex-col space-y-4">
-              <label
-                htmlFor="organisationName"
-                className="text-sm font-semibold"
-              >
-                Organisation Name
-              </label>
-              <input
-                type="text"
-                id="organisationName"
-                className="p-2 border border-gray-200 rounded-md"
+
+            <Form {...form}>
+
+            <form onSubmit={handleSubmit(handleStep4)} className="flex flex-col gap-1">
+        <div>
+          <label>Name</label>
+          <input
+          className="label ml-1 p-1"
+            type="text"
+            {...register('name', { required: true })}
+          />
+        </div>
+        <div className="flex flex-col gap-1">
+          <label>Start Date</label>
+          <input
+           className="label ml-1 p-1"
+            type="date"
+            {...register('startDate')}
+          />
+        </div>
+        <div className="flex flex-col gap-1">
+          <label >End Date</label>
+          <input
+           className="label ml-1 p-1"
+            type="date"
+            {...register('endDate')}
+          />
+        </div>
+        <div>
+          <label>Status</label>
+          <select {...register('status')}  className="label ml-1 p-1">
+            <option value="Not Started">Not Started</option>
+            <option value="In Progress">In Progress</option>
+            <option value="Completed">Completed</option>
+          </select>
+        </div>
+        <div>
+          <label>Teams</label>
+          <Controller
+            name="selectedTeams"
+            control={control}
+            render={({ field }) => (
+              <Select
+                {...field}
+                isMulti
+                options={teams}
               />
-              <button className="bg-green-500 text-white rounded-md p-2">
-                Create Organisation
-              </button>
-            </form>
+            )}
+          />
+        </div>
+        <div className="flex gap-2">
+        <button type="submit"  className="p-2 bg-green-500 rounded-lg mt-2 text-white">Create Project</button>
+        <button onClick={()=>closeModal()}  className="p-2 bg-green-500 rounded-lg mt-2 text-white">Create Later</button>
+        </div>
+      </form>
+              </Form> 
           </div>
           <div>
             <Image

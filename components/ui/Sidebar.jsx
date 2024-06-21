@@ -93,7 +93,7 @@ const Sidebar = ({openSide,setOpen}) => {
 
     <>
     { openSide &&(        
-    <div className=" flex flex-col max-w-[300px] shadow-2xl min-h-screen  bg-[#181F38] ">
+    <div className=" flex flex-col max-w-[300px] shadow-2xl min-h-screen  bg-[#181F38] z-[10000]">
       {/* Logo */}
       <div className="flex flex-col items-center justify-center p-5 gap-8">
         <div className='flex  items-center gap-[100px]'>
@@ -131,7 +131,7 @@ const Sidebar = ({openSide,setOpen}) => {
                     <AccordionItem key={sub.name} href={sub.href}>
                     <div className='flex gap-2'>
                     
-                      <img width="20" height="12" src={`${sub.url}`} alt="L"/>
+                      <Image width={20} height={12} src={`${sub.url}`} alt="L"/>
                       {sub.name}
                       </div>
                     </AccordionItem>

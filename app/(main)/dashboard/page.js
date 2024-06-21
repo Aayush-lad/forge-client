@@ -33,7 +33,7 @@ const page = () => {
     <h1 className="text-2xl font-bold mb-4">Dashboard</h1>
     <Modal isOpen={isModalOpen} onClose={closeModal}>
       {/* Create Organisation  */}
-      <Welcome step={step} setStep={setStep}/>
+      <Welcome step={step} setStep={setStep} closeModal={closeModal}/>
     </Modal>
   </div>
   )

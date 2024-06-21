@@ -68,6 +68,11 @@
       --input: 217.2 32.6% 17.5%;
       --ring: 212.7 26.8% 83.9%;
     }
+
+    .label{
+      @apply border rounded-md border-[#E6E6E6];
+    
+    }
   }
 
   @layer base {
@@ -78,3 +83,4 @@
       @apply bg-background text-foreground;
     }
   }
+
