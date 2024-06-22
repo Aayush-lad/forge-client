@@ -6,7 +6,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import {UserProvider} from "../context/userContext";
 import QueryProvider from '../context/QueryProvider';
 
-const inter = Inter({ subsets: ["latin"] });
+const inter = Inter({ subsets: ["cyrillic"] });
 
 export const metadata = {
   title: "Create Next App",
@@ -19,6 +19,7 @@ export default function RootLayout({ children }) {
 
   return (
     <html lang="en">
+   
       <body className={inter.className}>
         <UserProvider/>
       <QueryProvider>

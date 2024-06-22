@@ -20,8 +20,8 @@ const Sidebar = ({openSide,setOpen}) => {
       id: 1,
       url:"https://img.icons8.com/external-tanah-basah-basic-outline-tanah-basah/24/FFFFFF/external-team-user-tanah-basah-basic-outline-tanah-basah.png",
       subcategories: [
-        { name: "Dashboard", href: `/dashboard/${orgId}`,url:"https://img.icons8.com/ios/50/FFFFFF/performance-macbook.png" },
-        { name: "Create Organisation", href: `/dashboard/${orgId}`, url:"https://img.icons8.com/android/24/FFFFFF/plus.png" },
+        { name: "User management", href: `/organization/${orgId}`,url:"https://img.icons8.com/ios/50/FFFFFF/performance-macbook.png" },
+        { name: "Create Organisation", href: `/organization/create`, url:"https://img.icons8.com/android/24/FFFFFF/plus.png" },
         { name: "All Organisation", href: `/dashboard/${orgId}`,url:"https://img.icons8.com/external-sbts2018-outline-sbts2018/58/FFFFFF/external-all-basic-ui-elements-2.3-sbts2018-outline-sbts2018.png" },
       ],
     },
@@ -36,7 +36,7 @@ const Sidebar = ({openSide,setOpen}) => {
         { name: "Kanban Board", href: `/dashboard/${orgId}`,url:"https://img.icons8.com/?size=100&id=RmLuhX9564tx&format=png&color=FFFFFF" },
         { name: "Gantt Chart", href: `/dashboard/${orgId}`,url:"https://img.icons8.com/?size=100&id=Q7kCK9C7TNdk&format=png&color=FFFFFF"},
         { name: "Calendar", href: `/dashboard/${orgId}`,url:"https://img.icons8.com/?size=100&id=Q7kCK9C7TNdk&format=png&color=FFFFFF" },
-        { name: "Whiteboard", href: `/dashboard/${orgId}` ,url:"https://img.icons8.com/?size=100&id=Oyhn1OzMgr68&format=png&color=FFFFFF"},
+
         { name: "Settings", href: `/dashboard/${orgId}`,url:"https://img.icons8.com/?size=100&id=Oyhn1OzMgr68&format=png&color=FFFFFF" },
       ],
     },
@@ -47,6 +47,7 @@ const Sidebar = ({openSide,setOpen}) => {
       subcategories: [
         { name: "Chat", href: `/dashboard/${orgId}` ,url:"https://img.icons8.com/?size=100&id=67444&format=png&color=FFFFFF"},
         { name: "Schedules", href: `/dashboard/${orgId}`,url:"https://img.icons8.com/?size=100&id=7724&format=png&color=FFFFFF" },
+        { name: "Whiteboard", href: `/dashboard/${orgId}` ,url:"https://img.icons8.com/?size=100&id=Oyhn1OzMgr68&format=png&color=FFFFFF"},
         { name: "Video Conference", href: `/dashboard/${orgId}`,url:"https://img.icons8.com/?size=100&id=22994&format=png&color=FFFFFF" },
       ],
     },

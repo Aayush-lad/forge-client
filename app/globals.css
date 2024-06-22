@@ -6,6 +6,14 @@
     overflow: hidden;
   }
 
+  /* globals.css or directly in _app.js */
+@layer base {
+  body {
+    font-family: 'Playwrite DE Grund', sans-serif;
+  }
+}
+
+
   @layer base {
     :root {
       --background: 0 0% 100%;

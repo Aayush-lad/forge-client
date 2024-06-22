@@ -9,6 +9,8 @@ module.exports = {
   ],
   prefix: "",
   theme: {
+
+
     container: {
       center: true,
       padding: "2rem",
@@ -17,6 +19,10 @@ module.exports = {
       },
     },
     extend: {
+
+      fontFamily: {
+        'playwrite-de-grund': ['Playwrite DE Grund', 'sans-serif'],
+      },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
@@ -51,6 +57,7 @@ module.exports = {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
+      
       },
       borderRadius: {
         lg: "var(--radius)",

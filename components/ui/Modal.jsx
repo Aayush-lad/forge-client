@@ -1,32 +1,39 @@
-"use client"
+"use client";
 import React, { useEffect, useRef } from 'react';
-import { createPortal } from 'react-dom';
+import ReactDOM from 'react-dom';
 
 const Modal = ({ isOpen, onClose, children }) => {
   const modalRef = useRef(null);
 
   useEffect(() => {
-    if (isOpen) {
+    if (isOpen && typeof document !== 'undefined') {
       document.body.classList.add('modal-open');
-    } else {
+    } else if (typeof document !== 'undefined') {
       document.body.classList.remove('modal-open');
     }
 
     return () => {
-      document.body.classList.remove('modal-open');
-     
+      if (typeof document !== 'undefined') {
+        document.body.classList.remove('modal-open');
+      }
     };
-  }, [isOpen, onClose]);
+  }, [isOpen]);
+
+  if (typeof document === 'undefined') {
+    return null;
+  }
 
   if (!isOpen) return null;
 
   const handleOverlayClick = (event) => {
-    return;
+    if (modalRef.current && !modalRef.current.contains(event.target)) {
+      onClose();
+    }
   };
 
-  return createPortal(
+  return ReactDOM.createPortal(
     <div
-      className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 "
+      className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
       onClick={handleOverlayClick}
     >
       <div

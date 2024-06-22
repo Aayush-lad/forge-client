@@ -12,12 +12,17 @@ import Logo from './Logo';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 
+
+
+
 const AuthForm = () => {
 
 
 
 
   const [isSignUp, setIsSignUp] = useState(true);
+
+
 
 
   const form = useForm();
@@ -28,7 +33,6 @@ const AuthForm = () => {
   const onSubmit = async (data) => {
     if(isSignUp){
      const res = await axios.post("http://localhost:5000/auth/register",data);
-
       if(res.data.status){
         localStorage.setItem('token',res.data.token);
         toast.success("Account created Successfully")
@@ -46,10 +50,8 @@ const AuthForm = () => {
         localStorage.setItem('token',res.data.token);
         toast.success("Authentication successfull");
         router.push("/dashboard");
-      
       }
       else{
-
         toast.error("Invalid credentials");
       }
     }

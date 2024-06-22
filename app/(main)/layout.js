@@ -19,7 +19,7 @@ const layout = ({children}) => {
         <main className="flex-grow flex-col ">
           <header>
             <Header openSide={openSide} setOpen={setOpen}>
-              Dashboard
+              Current Organization :
             </Header>
           </header>
           <div className={`transition-all duration-500 ${openSide ? 'ml-[300px]' : 'ml-1'}`}>
