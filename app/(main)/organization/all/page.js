@@ -5,7 +5,7 @@ import axios from 'axios';
 import { useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { Pagination } from '@/components/ui/pagination'; // Assuming you have a Pagination component
+import { Pagination } from '@/components/ui/pagination'
 
 const fetchOrganizations = async () => {
   const token = localStorage.getItem('token');
