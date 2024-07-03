@@ -12,15 +12,17 @@ import Logo from './Logo';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 
-
+import {useAuth} from "../../context/AuthContext";
+import {useUser} from "../../context/UserContext";
 
 
 const AuthForm = () => {
 
 
-
-
   const [isSignUp, setIsSignUp] = useState(true);
+
+  const {login} = useAuth();
+  const {setUserInfo} = useUser();
 
 
 
@@ -35,6 +37,8 @@ const AuthForm = () => {
      const res = await axios.post("http://localhost:5000/auth/register",data);
       if(res.data.status){
         localStorage.setItem('token',res.data.token);
+        login(res.data.token,res.data.user);
+
         toast.success("Account created Successfully")
         router.push("/dashboard?welcome=true")
       }
@@ -48,6 +52,8 @@ const AuthForm = () => {
       console.log(res);
       if(res.data.status){
         localStorage.setItem('token',res.data.token);
+        login(res.data.token,res.data.user);
+        // setUserInfo(res.data.user);
         toast.success("Authentication successfull");
         router.push("/dashboard");
       }

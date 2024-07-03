@@ -1,10 +1,11 @@
-
+import '@stream-io/video-react-sdk/dist/css/styles.css'
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
-import {UserProvider} from "../context/userContext";
+import {UserProvider} from "../context/UserContext";
 import QueryProvider from '../context/QueryProvider';
+import {AuthProvider} from "../context/AuthContext";
 
 const inter = Inter({ subsets: ["cyrillic"] });
 
@@ -21,7 +22,12 @@ export default function RootLayout({ children }) {
     <html lang="en">
    
       <body className={inter.className}>
-        <UserProvider/>
+
+
+        <UserProvider>
+
+          <AuthProvider>
+      
       <QueryProvider>
           {children}
           <ToastContainer 
@@ -38,6 +44,9 @@ export default function RootLayout({ children }) {
             theme="light"
           />
         </QueryProvider>
+        </AuthProvider>
+
+        </UserProvider>
 
       </body>
     </html>

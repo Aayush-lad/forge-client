@@ -1,20 +1,25 @@
+"use client"
 import React from 'react'
 
 import Select from "react-select";
 import axios from "axios"
 import { toast } from 'react-toastify';
+import { useUser } from 'context/UserContext';
 
 
 
-const AddUserForm = ({onAdd,type="org"}) => {
+const AddUserForm = ({onAdd,type="org",teamId=null}) => {
 
-    const orgId = "6673fdc1829766e65a19f591";
-    const teamId = "66778acf269de4bce0c6b5b1"
+    const {organization} = useUser()
+    const orgId = organization._id
+    
 
     const handleSubmit = async(e)=>{
         e.preventDefault()
         const email = document.getElementById("email").value;
-        const role = document.getElementById("role").value;
+        let role = null;
+        if(type=='org')
+        role = document.getElementById("role").value;
         let data ={}
         if(!teamId ){
            data = {

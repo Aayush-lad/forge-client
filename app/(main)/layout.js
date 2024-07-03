@@ -1,18 +1,22 @@
 "use client"
-import React ,{useState} from 'react'
+import React ,{useEffect, useState} from 'react'
 import Sidebar from '@/components/ui/Sidebar'
 import Header from '@/components/ui/Header'
+import { useRouter } from 'next/navigation'
+import { useAuth } from 'context/AuthContext'
+import Loader from "@/components/ui/Loader";
 
 
 const layout = ({children}) => {
 
     const [openSide,setOpen] = useState(true)
   
+
   
     return (
       <div className="flex">
-        
-        <aside className="fixed top-0 left-0 h-full ">
+
+        <aside className="fixed top-0 left-0 h-full z-[1000000] ">
           <Sidebar openSide={openSide} setOpen={setOpen} className="fixed" />
         </aside>
     

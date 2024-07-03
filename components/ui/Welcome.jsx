@@ -41,8 +41,14 @@ const Welcome = ({ step, setStep,closeModal }) => {
     // fetch teams
 
     const fetchTeams = async () => {
+      const token = localStorage.getItem('token')
       try {
-        const response = await axios.get(`http://localhost:5000/team/${orgId}/teams`);
+        const response = await axios.get(`http://localhost:5000/team/${orgId}/teams`,{
+          headers:{
+            Authorization:`Bearer ${token}`
+          }
+        
+        });
         console.log(response);
         const teamOptions = response.data.map(t => ({
           value: t._id,
@@ -64,7 +70,6 @@ const Welcome = ({ step, setStep,closeModal }) => {
 
   const handleStep1 = async (e) => {
     e.preventDefault();
-
     const token = localStorage.getItem("token");
 
     setStep(2);
@@ -132,6 +137,10 @@ const Welcome = ({ step, setStep,closeModal }) => {
         name,
         organizationId,
         memberIds: selectedMembers.map((member) => member.value),
+      },{
+        headers:{
+          Authorization:`Bearer ${localStorage.getItem('token')}`
+        }
       });
       setStep(4);
       toast.success(response.data.message);

@@ -37,7 +37,6 @@ const AllOrganizationsPage = () => {
   const [search, setSearch] = useState('');
   const [filteredOrgs, setFilteredOrgs] = useState([]);
   const router = useRouter();
-  const [refetch,setRefetch] = useState(false);
 
   useEffect(() => {
     if (data) {

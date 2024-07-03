@@ -17,6 +17,7 @@ const UserManagement = () => {
   const [openAddModal, setOpenAddModal] = useState(false);
   const [email, setEmail] = useState(null);
 
+
   const queryClient = useQueryClient();
   const { organizationId } = useParams();
 
@@ -32,7 +33,9 @@ const UserManagement = () => {
 
   const addOrgMember = async (data) => {
     const token = localStorage.getItem("token");
-    await axios.post(
+    console.log(data);
+    data.organizationId = organizationId
+    const res =await axios.post(
       "http://localhost:5000/organization/add-member",
       data,
       {
@@ -41,6 +44,8 @@ const UserManagement = () => {
         },
       }
     );
+
+    console.log(res.data);
   };
 
   const deleteOrgUser = async (deleteEmail) => {
