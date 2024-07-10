@@ -1,6 +1,6 @@
 "use client";
 import Modal from "@/components/ui/Modal";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState,Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import Welcome from "@/components/ui/Welcome";
 import { useUser } from"@/lib/context/UserContext";
@@ -148,4 +148,12 @@ function Page() {
   );
 }
 
-export default Page;
+function Wrapper(){
+  return (
+    <Suspense fallback={<Loader/>}>
+    <Page />
+  </Suspense>
+  )
+}
+
+export default Wrapper;

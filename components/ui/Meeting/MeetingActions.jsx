@@ -239,4 +239,6 @@ const handleRecordingClick = () => {
   );
 });
 
+MeetingTypeList.displayName = 'MeetingTypeList';
+
 export default MeetingTypeList;

@@ -7,7 +7,7 @@ import { AuthProvider } from '@/lib/context/AuthContext'
 
 
 
-const layout = ({children}) => {
+const Layout = ({children}) => {
 
     const [openSide,setOpen] = useState(true)
   
@@ -38,4 +38,4 @@ const layout = ({children}) => {
 
 
 
-export default layout
+export default Layout

@@ -6,7 +6,7 @@ import RecordingList from "@/components/ui/Meeting/RecordingsList";
 import React,{useRef} from 'react'
 
 
-const page = () => {
+const Page = () => {
   const recordingRef = useRef(null);
   return (
     <>
@@ -17,4 +17,4 @@ const page = () => {
   )
 }
 
-export default page
+export default Page

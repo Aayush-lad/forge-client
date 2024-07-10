@@ -144,7 +144,7 @@ const CreateOrganization = () => {
             </div>
             <div {...getRootProps()} className="mb-4 p-4 border-2 border-dashed border-gray-300 rounded-lg text-center cursor-pointer">
               <input {...getInputProps()} />
-              <p>Drag 'n' drop a CSV file here, or click to select a file</p>
+              <p>Drag and drop a CSV file here, or click to select a file</p>
             </div>
             <button
               type="submit"

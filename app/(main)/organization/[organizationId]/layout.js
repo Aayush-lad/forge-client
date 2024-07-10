@@ -2,7 +2,7 @@
 import React from 'react'
 import { useParams } from 'next/navigation'
 import Image from 'next/image';
-const layout = ({children}) => {
+const Layout = ({children}) => {
 
     const {organizationId}  = useParams();
 
@@ -24,4 +24,4 @@ const layout = ({children}) => {
   )
 }
 
-export default layout
+export default Layout

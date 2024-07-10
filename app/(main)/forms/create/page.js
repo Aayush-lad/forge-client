@@ -150,8 +150,8 @@ const FormBuilder = () => {
 
         {/* all form element options 2 form element per row */}
         <div className='flex'></div>
-        {FormElementsOptions.map((item) => (
-          <button className="bg-blue-500 text-white py-2 px-4 rounded mb-2 w-[100px] m-2 flex flex-col items-center justify-center" title={item.title} onClick={item.onClick}>
+        {FormElementsOptions.map((item,index) => (
+          <button key={index} className="bg-blue-500 text-white py-2 px-4 rounded mb-2 w-[100px] m-2 flex flex-col items-center justify-center" title={item.title} onClick={item.onClick}>
             <Image src={item.url}  height={40} width={40} alt={item.title}/>
             <p>{item.title}</p>
           </button>

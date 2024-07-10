@@ -15,7 +15,7 @@ import ProjectMemberManagement from "@/components/ui/ProjectMemberManagement";
 
 
 
-const page = () => {
+const Page = () => {
   const [activeTab ,setActiveTab ] = useState(1);
 
   // fetch project by id
@@ -130,4 +130,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;

@@ -78,7 +78,7 @@ const Reviews = () => {
           </div>
 
           <p className="mt-4 text-gray-700">
-          "Forge has revolutionized the way our team handles projects. The Kanban boards are intuitive and the integration of collaborative whiteboards has made brainstorming sessions seamless. The video meetings and chat features keep our team connected and on track. Highly recommend Forge for any team looking to enhance their project management workflow!"
+          Forge has revolutionized the way our team handles projects. The Kanban boards are intuitive and the integration of collaborative whiteboards has made brainstorming sessions seamless. The video meetings and chat features keep our team connected and on track. Highly recommend Forge for any team looking to enhance their project management workflow
           </p>
         </blockquote>
       </div>
@@ -151,7 +151,7 @@ const Reviews = () => {
           </div>
 
           <p className="mt-4 text-gray-700">
-          "Using Forge has transformed how our marketing team manages campaigns. The Kanban boards and collaborative whiteboard facilitate seamless planning and execution. The ability to customize forms and gather real-time feedback has improved our campaign responsiveness. Forge’s intuitive interface and comprehensive features make it indispensable for any marketing team."
+          Using Forge has transformed how our marketing team manages campaigns. The Kanban boards and collaborative whiteboard facilitate seamless planning and execution. The ability to customize forms and gather real-time feedback has improved our campaign responsiveness. Forge’s intuitive interface and comprehensive features make it indispensable for any marketing team.
           </p>
         </blockquote>
       </div>
@@ -224,7 +224,7 @@ const Reviews = () => {
           </div>
 
           <p className="mt-4 text-gray-700">
-          "Forge has exceeded our expectations in every way. The drag-and-drop form builder and the collaborative whiteboard have streamlined our workflow. The subscription management is transparent and flexible, catering to our specific needs. Forge’s powerful features and user-friendly interface make it the best project management tool we’ve ever used."
+          Forge has exceeded our expectations in every way. The drag-and-drop form builder and the collaborative whiteboard have streamlined our workflow. The subscription management is transparent and flexible, catering to our specific needs. Forge’s powerful features and user-friendly interface make it the best project management tool we’ve ever used.
           </p>
         </blockquote>
       </div>
@@ -297,7 +297,7 @@ const Reviews = () => {
           </div>
 
           <p className="mt-4 text-gray-700">
-          Since adopting Forge, our project management has become more efficient and organized. The flexibility of the drag-and-drop form builder and the comprehensive analytics dashboard have provided us with invaluable insights. Forge’s subscription management is straightforward, and the customer support team is always ready to help. A game-changer for our business!"
+          Since adopting Forge, our project management has become more efficient and organized. The flexibility of the drag-and-drop form builder and the comprehensive analytics dashboard have provided us with invaluable insights. Forge’s subscription management is straightforward, and the customer support team is always ready to help. A game-changer for our business!
           </p>
         </blockquote>
       </div>
@@ -370,7 +370,7 @@ const Reviews = () => {
           </div>
 
           <p className="mt-4 text-gray-700">
-          "Forge’s interface is sleek and user-friendly, making it easy to manage multiple projects simultaneously. The real-time collaboration features, such as the collaborative whiteboard and team chat, have significantly improved our productivity. The ability to customize our subscription plan according to our needs is a big plus. Forge is a must-have tool for any development team!"
+          Forge’s interface is sleek and user-friendly, making it easy to manage multiple projects simultaneously. The real-time collaboration features, such as the collaborative whiteboard and team chat, have significantly improved our productivity. The ability to customize our subscription plan according to our needs is a big plus. Forge is a must-have tool for any development team!
           </p>
         </blockquote>
       </div>
@@ -443,7 +443,7 @@ const Reviews = () => {
           </div>
 
           <p className="mt-4 text-gray-700">
-          "Forge has made managing our projects so much easier. The unlimited project feature in the Basic and Business plans is perfect for our growing needs. The video meetings are reliable, and the integration with other tools is seamless. Forge’s intuitive design and robust features make it an essential tool for our product management."
+          Forge has made managing our projects so much easier. The unlimited project feature in the Basic and Business plans is perfect for our growing needs. The video meetings are reliable, and the integration with other tools is seamless. Forge’s intuitive design and robust features make it an essential tool for our product management.
           </p>
         </blockquote>
       </div>
@@ -516,7 +516,7 @@ const Reviews = () => {
           </div>
 
           <p className="mt-4 text-gray-700">
-          "We switched to Forge a few months ago, and the impact on our project management has been profound. The platform is incredibly versatile, accommodating all our team’s needs from Kanban boards to video meetings. The analytics provide great insights, helping us make informed decisions. Forge is the ultimate project management tool!"
+          We switched to Forge a few months ago, and the impact on our project management has been profound. The platform is incredibly versatile, accommodating all our team’s needs from Kanban boards to video meetings. The analytics provide great insights, helping us make informed decisions. Forge is the ultimate project management tool!
           </p>
         </blockquote>
       </div>
@@ -589,7 +589,7 @@ const Reviews = () => {
           </div>
 
           <p className="mt-4 text-gray-700">
-          "Forge has exceeded our expectations in every way. The drag-and-drop form builder and the collaborative whiteboard have streamlined our workflow. The subscription management is transparent and flexible, catering to our specific needs. Forge’s powerful features and user-friendly interface make it the best project management tool we’ve ever used."
+          Forge has exceeded our expectations in every way. The drag-and-drop form builder and the collaborative whiteboard have streamlined our workflow. The subscription management is transparent and flexible, catering to our specific needs. Forge’s powerful features and user-friendly interface make it the best project management tool we’ve ever used.
           </p>
         </blockquote>
       </div>
@@ -662,7 +662,7 @@ const Reviews = () => {
           </div>
 
           <p className="mt-4 text-gray-700">
-          Forge has been a game-changer for our operations management. The unlimited teams and organizations in the Business plan perfectly suit our global operations. The integration of collaborative tools like the whiteboard and video meetings has enhanced our team's efficiency and decision-making. Forge’s robust analytics dashboard provides actionable insights, making it an invaluable asset to our organization
+          Forge has been a game-changer for our operations management. The unlimited teams and organizations in the Business plan perfectly suit our global operations. The integration of collaborative tools like the whiteboard and video meetings has enhanced our team &apos; efficiency and decision-making. Forge robust analytics dashboard provides actionable insights, making it an invaluable asset to our organization
           </p>
         </blockquote>
       </div>

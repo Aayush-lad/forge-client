@@ -2,7 +2,8 @@
 import axios from 'axios';
 // pages/payment-successful.js
 import { useRouter ,useSearchParams} from 'next/navigation';
-import { useEffect } from 'react';
+import { useEffect,Suspense } from 'react';
+import Loader from '@/components/ui/Loader';
 
 const PaymentSuccessful = () => {
   const router = useRouter();
@@ -49,4 +50,10 @@ const PaymentSuccessful = () => {
   );
 };
 
-export default PaymentSuccessful;
+function Wrapper(){
+  return <Suspense fallback={<Loader/>}>
+    <PaymentSuccessful/>
+  </Suspense>
+}
+
+export default Wrapper;

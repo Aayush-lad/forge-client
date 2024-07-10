@@ -82,4 +82,6 @@ const RecordingsList = forwardRef((props,ref) => {
   );
 });
 
+RecordingsList.displayName = 'RecordingsList'
+
 export default RecordingsList;

@@ -13,7 +13,7 @@ import Select from 'react-select';
 import { Controller } from 'react-hook-form';
 import { toast } from 'react-toastify';
 
-const page = () => {
+const Page = () => {
     const {organizationId} = useParams();
     const {userinfo} = useUser();
     const queryClient = useQueryClient();
@@ -271,4 +271,4 @@ const page = () => {
   )
 }
 
-export default page
+export default Page

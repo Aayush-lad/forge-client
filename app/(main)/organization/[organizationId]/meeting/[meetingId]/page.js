@@ -9,7 +9,7 @@ import MeetingRoom from "@/components/ui/Meeting/MeetingRoom"
 import Loader from '@/components/ui/Loader';
 
 
-const page = () => {
+const Page = () => {
     const {meetingId} = useParams()
     const {userinfo,loading} = useUser();
     const [isSetup ,setSetupComplete] = useState(false);
@@ -35,4 +35,4 @@ const page = () => {
   )
 }
 
-export default page
+export default Page
