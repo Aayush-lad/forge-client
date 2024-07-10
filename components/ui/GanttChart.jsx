@@ -4,6 +4,13 @@ import { Gantt, Task } from 'gantt-task-react'; // Import Gantt and Task compone
 import 'gantt-task-react/dist/index.css';
 
 const GanttChart = ({ tasks }) => {
+
+  if(tasks.length==0){
+    return <div className='font-bold text-2xl flex items-center justify-center'>
+      <h1>No tasks found</h1>
+    </div>
+  }
+  console.log(tasks)
   const ganttTasks = tasks.map((task) => ({
     id: task._id,
     name: task.title,
@@ -16,7 +23,7 @@ const GanttChart = ({ tasks }) => {
   return (
     <div className="relative h-full">
       <Sidebar />
-      <div className="absolute top-0 left-0 w-full h-full bg-gray-50 z-0">
+      <div className="absolute top-0 left-0 w-full h-full bg-green-500 z-0 ml-2">
         {/* Adjust left-64 based on your sidebar width */}
         <Gantt tasks={ganttTasks} />
       </div>

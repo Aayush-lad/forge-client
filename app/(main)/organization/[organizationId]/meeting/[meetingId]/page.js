@@ -6,6 +6,7 @@ import { StreamCall,StreamTheme } from '@stream-io/video-react-sdk';
 import{useCallById} from "hooks/useCallbyId"
 import MeetingSetup from "@/components/ui/Meeting/MeetingSetup"
 import MeetingRoom from "@/components/ui/Meeting/MeetingRoom"
+import Loader from '@/components/ui/Loader';
 
 
 const page = () => {
@@ -13,8 +14,9 @@ const page = () => {
     const {userinfo,loading} = useUser;
     const [isSetup ,setSetupComplete] = useState(false);
     const {call,isCallLoading} = useCallById();
+    
 
-    if(loading || isCallLoading) return <h1>Loading...</h1>
+    if(loading || isCallLoading) return <Loader/>
 
   return (
     <div className='w-full h-full'>

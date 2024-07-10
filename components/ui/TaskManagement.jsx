@@ -14,20 +14,55 @@ const TaskManagement = ({ data }) => {
   const [filterOption, setFilterOption] = useState('');
   const [isOpen , setisOpen] = useState(false);
   const { projectId } = useParams();
+  console.log(projectId);
   const queryClient = useQueryClient();
 
   const createTask = async (task) => {
-    const response = await axios.post(`http://localhost:5000/project/6678ef15a8526ce6879662ef/add-task`, task);
+
+    console.log(task);
+    const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/project/${projectId}/add-task`, task);
     console.log(response.data);
   
     return response.data;
   };
 
+  console.log("Tasks:",data);
+
+
+
+
+  // total tasks
+
+  const totaltasks = data?.length;
+
+  // to do tasks count
+
+  const todo = data.filter((t)=>{
+    return t.status == "To Do"
+  }).length;
+
+  
+  const ongoing = data.filter((t)=>{
+    return t.status == "In Progress"
+  }).length;
+
+  
+  const completed = data.filter((t)=>{
+    return t.status == "Completed"
+  }).length;
+
+
+
+
+
+
+
+
   const createTaskMutation = useMutation({
     mutationFn: createTask,
     onSuccess: (data) => {
       console.log(data);
-      queryClient.invalidateQueries(['project', '6678ef15a8526ce6879662ef']);
+      queryClient.invalidateQueries(['project', projectId]);
     },
     onError: (error) => {
       console.log(error);
@@ -77,7 +112,7 @@ const TaskManagement = ({ data }) => {
             <div className='flex items-center justify-center bg-blue-100 rounded-full'>
               <Image src='/totaltask.png' width={120} height={120} alt='task icon' />
             </div>
-            <h1 className='text-2xl font-bold text-gray-800 mt-2'>20</h1>
+            <h1 className='text-2xl font-bold text-gray-800 mt-2'>{totaltasks}</h1>
             <p className='text-gray-500'>Total Tasks</p>
           </div>
 
@@ -85,7 +120,7 @@ const TaskManagement = ({ data }) => {
             <div className='flex items-center justify-center bg-blue-100 rounded-full'>
               <Image src='/todotask.png' width={150} height={100} alt='task icon' />
             </div>
-            <h1 className='text-2xl font-bold text-gray-800 mt-2'>10</h1>
+            <h1 className='text-2xl font-bold text-gray-800 mt-2'>{todo}</h1>
             <p className='text-gray-500'>Todo Tasks</p>
           </div>
 
@@ -93,7 +128,7 @@ const TaskManagement = ({ data }) => {
             <div className='flex items-center justify-center bg-blue-100 rounded-full'>
               <Image src='/ongoingtask.jpeg' width={200} height={240} alt='task icon' />
             </div>
-            <h1 className='text-2xl font-bold text-gray-800 mt-2'>10</h1>
+            <h1 className='text-2xl font-bold text-gray-800 mt-2'>{ongoing}</h1>
             <p className='text-gray-500'>On Going Tasks</p>
           </div>
 
@@ -101,7 +136,7 @@ const TaskManagement = ({ data }) => {
             <div className='flex items-center justify-center bg-blue-100 rounded-full'>
               <Image src='/completedtask.jpeg' width={200} height={240} alt='task icon' />
             </div>
-            <h1 className='text-2xl font-bold text-gray-800 mt-2'>10</h1>
+            <h1 className='text-2xl font-bold text-gray-800 mt-2'>{completed}</h1>
             <p className='text-gray-500'>Completed Tasks</p>
           </div>
         </div>
@@ -151,12 +186,7 @@ const TaskManagement = ({ data }) => {
         </div>
       ) : (
         <>
-          <p>No tasks available</p>
-          <div className='mt-4'>
-            <button className='bg-blue-500 text-white p-2 rounded-lg' onClick={() => createTaskMutation.mutate({ title: 'Task 1', description: 'Task 1 description', status: 'To Do' })}>
-              Create Task
-            </button>
-          </div>
+          <h1 className='text-xl font-bold mt-4'>No Tasks</h1>
         </>
       )}
     </div>

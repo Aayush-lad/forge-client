@@ -45,7 +45,7 @@ const createMeetingRequest = async ({ client, values, user }) => {
 
 const addMeetingRequest = async ({ callDetail, values, user, organizationId }) => {
   const response = await axios.post(
-    "http://localhost:5000/meeting/add-meeting",
+    `${process.env.NEXT_PUBLIC_API_URL}/meeting/add-meeting`,
     {
       startsAt: values.dateTime,
       description: values.description,
@@ -132,33 +132,33 @@ const handleRecordingClick = () => {
 
   if (!client || !user) return <Loader />;
 
-  const meetingLink = `${process.env.NEXT_PUBLIC_BASE_URL}/meeting/${callDetail?.id}`;
+  const meetingLink = `${process.env.NEXT_PUBLIC_NEXT_PUBLIC_API_URL}/meeting/${callDetail?.id}`;
 
   return (
     <section className="grid grid-cols-1 mt-2 mx-2 flex-1 gap-5 md:grid-cols-2 xl:grid-cols-4">
       <MeetCard
-        img="/icons/add-meeting.svg"
+        img="https://img.icons8.com/?size=100&id=6697&format=png&color=FFFFFF"
         title="New Meeting"
         description="Start an instant meeting"
         className="bg-green-400"
         handleClick={() => setMeetingState('isInstantMeeting')}
       />
       <MeetCard
-        img="/icons/join-meeting.svg"
+        img="https://img.icons8.com/?size=100&id=nIIlw37EbWRh&format=png&color=FFFFFF"
         title="Join Meeting"
         description="via invitation link"
         className="bg-orange-400 flex-1"
         handleClick={() => setMeetingState('isJoiningMeeting')}
       />
       <MeetCard
-        img="/icons/schedule.svg"
+        img="https://img.icons8.com/?size=100&id=48546&format=png&color=FFFFFF"
         title="Schedule Meeting"
         description="Plan your meeting"
         className="bg-purple-400 flex-1"
         handleClick={() => setMeetingState('isScheduleMeeting')}
       />
       <MeetCard
-        img="/icons/recordings.svg"
+        img="https://img.icons8.com/?size=100&id=57335&format=png&color=FFFFFF"
         title="View Recordings"
         description="Meeting Recordings"
         className="bg-yellow-400 flex-1"

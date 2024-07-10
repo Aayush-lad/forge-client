@@ -1,19 +1,17 @@
 //  project/[projectId] page
 "use client"
 import React, { useState } from "react";
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import {  useQuery } from "@tanstack/react-query";
 // import { columns } from "./columns";
 // import { DataTable } from "./data-table";
 import axios from "axios";
 import Loader from "@/components/ui/Loader";
-import Modal from "@/components/ui/Modal";
-import AddUserForm from "@/components/ui/AddUserForm";
-import { toast } from "react-toastify";
 import { useParams } from "next/navigation";
 import ProjectOverview from "@/components/ui/ProjectOverview"
 import TaskManagement from "@/components/ui/TaskManagement";
 import KanbanBoard from "@/components/ui/KanbanBoard";
 import GanttChart from "@/components/ui/GanttChart"
+import ProjectMemberManagement from "@/components/ui/ProjectMemberManagement";
 
 
 
@@ -27,8 +25,7 @@ const page = () => {
 
 
   const fetchProject = async()=>{
-    const response = await axios.get(`http://localhost:5000/project/${projectId}`);
-    console.log(response.data);
+    const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/project/${projectId}`);
     return response.data;
   }
 
@@ -102,16 +99,7 @@ const page = () => {
             Gantt chart
           </button>
 
-             <button
-            className={`text-sm p-2 ${
-              activeTab == 6
-                ? "bg-green-500 rounded-lg text-white"
-                : " text-black "
-            }`}
-            onClick={() => setActiveTab(6)}
-          >
-            Calendar
-          </button>  
+          
         </div>
       </div>
       {/* Project overview section */}
@@ -129,8 +117,15 @@ const page = () => {
       )}
       {/* Gantt chart section */}
       {activeTab == 4 && (
-        <GanttChart tasks={data.project.tasks}/>
+        <GanttChart tasks={data.project.tasks} projectId={projectId} />
       )}
+
+      {/* Project member management */}
+      {
+        activeTab==2 &&(
+          <ProjectMemberManagement data={data.project.members}/>
+        )
+      }
     </>
   );
 };

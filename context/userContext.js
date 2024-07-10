@@ -1,15 +1,15 @@
 // UserContext.js
-"use client"
+"use client";
 import { createContext, useContext, useEffect, useReducer } from 'react';
-import axios from 'axios'
+import axios from 'axios';
 import { useRouter } from 'next/navigation';
 
 const UserContext = createContext();
 
-
 const initialState = {
   userinfo: null,
-  organization: null
+  organization: null,
+  loading: false,
 };
 
 const userReducer = (state, action) => {
@@ -18,11 +18,23 @@ const userReducer = (state, action) => {
       return {
         ...state,
         userinfo: action.payload,
+        loading: false,
       };
     case 'SET_ORG_INFO':
       return {
         ...state,
         organization: action.payload,
+        loading: false,
+      };
+    case 'SET_LOADING':
+      return {
+        ...state,
+        loading: true,
+      };
+    case 'RESET_LOADING':
+      return {
+        ...state,
+        loading: false,
       };
     default:
       return state;
@@ -41,69 +53,47 @@ export const UserProvider = ({ children }) => {
     dispatch({ type: 'SET_ORG_INFO', payload: orgInfo });
   };
 
-  // handle userInfo and organization Info on reload
-
-
-  useEffect(()=>{
-    const fetchUserInfo = async()=>{
-      const token = localStorage.getItem('token');
-      if(!token){
-        return;
-      }
-      const res = await axios.request("http://localhost:5000/auth/user",{
-        method:'GET',
-        headers:{
-          'Content-Type':'application/json',
-          'Authorization':`Bearer ${token}`
-        }
-    });
-    if(res.data){
-      setUserinfo(res.data.user);
-    }
-  }
-  fetchUserInfo();
-
-},[router]);
-
-useEffect(()=>{
-  const fetchUserInfo = async()=>{
-    const token = localStorage.getItem('token');
-    if(!token){
+  const fetchUserInfo = async () => {
+    dispatch({ type: 'SET_LOADING' });
+    let token = localStorage.getItem('token');
+    if (!token) {
+      dispatch({ type: 'RESET_LOADING' });
       return;
     }
-    const res = await axios.request("http://localhost:5000/auth/user",{
-      method:'GET',
-      headers:{
-        'Content-Type':'application/json',
-        'Authorization':`Bearer ${token}`
+    try {
+      const res = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/auth/user`, {
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`,
+        },
+      });
+      console.log(res.data);
+      if (res.data) {
+        setUserinfo(res.data.user);
       }
-  });
-  if(res.data){
-    setUserinfo(res.data.user);
-  }
-}
-fetchUserInfo();
+    } catch (error) {
+      console.error(error);
+    } finally {
+      dispatch({ type: 'RESET_LOADING' });
+    }
+  };
 
-},[]);
+  useEffect(() => {
+    fetchUserInfo();
+    fetchOrgInfo();
+  },[router]);
 
-// handling organizationInfo on reload using local storage stored orginfo
-
-useEffect(()=>{
-  const fetchOrgInfo = async()=>{
-  const orgInfo = await JSON.parse(localStorage.getItem('organization'));
-  if(orgInfo){
-    setOrganizationInfo(orgInfo);
-  }
-}
-fetchOrgInfo();
-}
-,[router])
+  const fetchOrgInfo = () => {
+    const orgInfo = JSON.parse(localStorage.getItem('organization'));
+    if (orgInfo) {
+      setOrganizationInfo(orgInfo);
+    }
+  };
 
 
-  console.log({...state});
 
   return (
-    <UserContext.Provider value={{...state, setUserinfo, setOrganizationInfo }}>
+    <UserContext.Provider value={{ ...state, setUserinfo, setOrganizationInfo }}>
       {children}
     </UserContext.Provider>
   );

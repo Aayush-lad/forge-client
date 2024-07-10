@@ -11,6 +11,7 @@ import AddUserForm from "@/components/ui/AddUserForm";
 import UpdateRole from "@/components/ui/UpdateRole";
 import { toast } from 'react-toastify';
 import { useParams } from 'next/navigation';
+import Image from 'next/image';
 
 const UserManagement = () => {
   const [openEditModal, setOpenEditModal] = useState(false);
@@ -22,11 +23,15 @@ const UserManagement = () => {
   const { organizationId } = useParams();
 
   const fetchOrgMembers = async () => {
-    const response = await axios.get(`http://localhost:5000/organization/${organizationId}/members`);
+    const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/organization/${organizationId}/members`,{
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('token')}`,
+      },
+    });
     return response.data;
   };
 
-  const { data, error, isLoading } = useQuery({
+  let { data, error, isLoading } = useQuery({
     queryKey: ['orgMembers', organizationId],
     queryFn: fetchOrgMembers,
   });
@@ -36,7 +41,7 @@ const UserManagement = () => {
     console.log(data);
     data.organizationId = organizationId
     const res =await axios.post(
-      "http://localhost:5000/organization/add-member",
+      `${process.env.NEXT_PUBLIC_API_URL}/organization/add-member`,
       data,
       {
         headers: {
@@ -45,26 +50,42 @@ const UserManagement = () => {
       }
     );
 
-    console.log(res.data);
+    if(res.data.status){
+      toast.success(res.data.message);
+    }
+    else{
+      toast.error(res.data.message);
+    }
   };
 
   const deleteOrgUser = async (deleteEmail) => {
     const data = { email: deleteEmail };
     const token = localStorage.getItem('token');
-    await axios.request({
+    const res = await axios.request({
       method: 'delete',
-      url: `http://localhost:5000/organization/${organizationId}/delete-member`,
+      url: `${process.env.NEXT_PUBLIC_API_URL}/organization/${organizationId}/delete-member`,
       data: data,
       headers: {
         Authorization: `Bearer ${token}`,
       },
     });
+
+    
+
+    if(res.data.status){
+      toast.success(res.data.message);
+    }
+    else{
+      toast.error(res.data.message);
+    }
+
+
   };
 
   const updateUser = async (data) => {
     const token = localStorage.getItem("token");
-    await axios.post(
-      `http://localhost:5000/organization/${organizationId}/update-role`,
+    const res = await axios.post(
+      `${process.env.NEXT_PUBLIC_API_URL}/organization/${organizationId}/update-role`,
       data,
       {
         headers: {
@@ -72,6 +93,13 @@ const UserManagement = () => {
         },
       }
     );
+
+    if(res.data.status){
+      toast.success(res.data.message);
+    }
+    else{
+      toast.error(res.data.message);
+    }
   };
 
   const addMemberMutation = useMutation({
@@ -92,6 +120,7 @@ const UserManagement = () => {
     mutationFn: updateUser,
     onSuccess: () => {
       queryClient.invalidateQueries(['orgMembers', organizationId]);
+      setOpenEditModal(false);
     },
   });
 
@@ -101,7 +130,16 @@ const UserManagement = () => {
   };
 
   if (isLoading) return <div className='flex-grow z-10'><Loader /></div>;
-  if (error) return <div>Error loading data</div>;
+  if(error) return <div className='flex flex-col items-center justify-center '> 
+  <Image src="/404.png" width={900} height={520}  />
+  <p className='text-lg   md:text-2xl font-bold'>Something went wrong !!</p>
+  </div>
+  if(!data.response && !data.status) return <div className='flex flex-col items-center justify-center mt-3 '> 
+  <Image src="/404.png" width={900} height={520}  />
+  <p className='text-lg md:text-2xl font-bold'>{data.message}</p>
+  </div>
+
+   data = data?.response;
 
   return (
     <>

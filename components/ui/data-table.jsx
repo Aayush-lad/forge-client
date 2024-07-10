@@ -22,7 +22,7 @@ import {
  
 import * as React from "react"
  
-export function DataTable({ columns,data,onDelete,setOpenAddModal}) {
+export function DataTable({ columns, data,onDelete}) {
     const [sorting, setSorting] = React.useState([])
     const [columnFilters, setColumnFilters] = React.useState([])
 
@@ -44,7 +44,7 @@ export function DataTable({ columns,data,onDelete,setOpenAddModal}) {
 
   return (
     <div>
-    <div className="flex items-center py-4 gap-2">
+    <div className="flex items-center py-4">
         <Input
           placeholder="Filter username..."
           value={(table.getColumn("username")?.getFilterValue()) ?? ""}
@@ -53,12 +53,6 @@ export function DataTable({ columns,data,onDelete,setOpenAddModal}) {
           }
           className="max-w-sm"
         />
-        <button className="bg-blue-500 p-2 rounded-lg text-white hover:bg-blue-700" onClick={()=>{
-          console.log("clicked");
-          setOpenAddModal(true);
-        }}>
-          + Add Member
-        </button>
       </div>
     <div className="rounded-md border">
       <Table>

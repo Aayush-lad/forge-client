@@ -47,7 +47,7 @@ const KanbanBoard = ({ tasks }) => {
 
     try {
       // Make API call to update task status
-      const response = await axios.put(`http://localhost:5000/project/${projectId}/update-task-status/${id}`, {
+      const response = await axios.put(`${process.env.NEXT_PUBLIC_API_URL}/project/${projectId}/update-task-status/${id}`, {
         status,
       });
 

@@ -22,7 +22,8 @@ const AuthForm = () => {
   const [isSignUp, setIsSignUp] = useState(true);
 
   const {login} = useAuth();
-  const {setUserInfo} = useUser();
+  const {setUserinfo} = useUser();
+  console.log(setUserinfo);
 
 
 
@@ -34,11 +35,12 @@ const AuthForm = () => {
 
   const onSubmit = async (data) => {
     if(isSignUp){
-     const res = await axios.post("http://localhost:5000/auth/register",data);
+     const res = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/auth/register`,data);
       if(res.data.status){
         localStorage.setItem('token',res.data.token);
         login(res.data.token,res.data.user);
-
+        console.log(res.data.user);
+        setUserinfo(res.data.user)
         toast.success("Account created Successfully")
         router.push("/dashboard?welcome=true")
       }
@@ -48,12 +50,13 @@ const AuthForm = () => {
     }
     else{
       console.log("in signin");
-      const res = await  axios.post("http://localhost:5000/auth/login",data);
+      const res = await  axios.post(`${process.env.NEXT_PUBLIC_API_URL}/auth/login`,data);
       console.log(res);
       if(res.data.status){
         localStorage.setItem('token',res.data.token);
         login(res.data.token,res.data.user);
-        // setUserInfo(res.data.user);
+        console.log(res.data.user);
+        setUserinfo(res.data.user);
         toast.success("Authentication successfull");
         router.push("/dashboard");
       }
@@ -81,7 +84,7 @@ const AuthForm = () => {
         {isSignUp && (
           <div className='flex flex-col gap-2'>
             <label htmlFor="username">Name</label>
-            <Input id="username" type="text" {...register('username', { required: 'Name is required' })} />
+            <Input id="username" type="text" {...register('username', { required: 'Name is required' })}  />
             {errors.name && <FormMessage>{errors.name.message}</FormMessage>}
           </div>
         )}
@@ -102,6 +105,12 @@ const AuthForm = () => {
       <Button onClick={toggleForm} >
         {isSignUp ? 'Already have an account? Sign In' : 'Don’t have an account? Sign Up'}
       </Button>
+      {/* forgot password */}
+      {!isSignUp &&
+      <div className='flex flex-col gap-2'>
+        <div onClick={()=>router.push("/forgot-password")} className='text-red-600 border-b cursor-pointer w-fit border-red-500 '>Forgot Password</div>
+      </div>
+      }
     </div>
     
   );

@@ -5,22 +5,21 @@ import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import { useUser } from 'context/UserContext';
-import { useParams } from 'next/navigation';
+import { useParams, useRouter } from 'next/navigation';
+import Loader from '@/components/ui/Loader';
 
 
 
 const CreateTeam = () => {
-
   const {organizationId} = useParams();
-
   const fetchOrgMembers = async () => {
     const token = localStorage.getItem('token')
-
-    const response = await axios.get(`http://localhost:5000/organization/${organizationId}/members`,{
+    const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/organization/${organizationId}/members`,{
       headers: {
         Authorization: `Bearer ${token}`,
       },
     });
+    console.log(response.data);
     return response.data;
   };
 
@@ -32,6 +31,10 @@ const CreateTeam = () => {
     queryKey: ['orgMembers'],
     queryFn: fetchOrgMembers,
   });
+  const { userinfo } = useUser();
+  const router = useRouter();
+
+  
 
   const handleMemberSelection = (memberId) => {
     setSelectedMembers((prevSelected) => {
@@ -42,7 +45,6 @@ const CreateTeam = () => {
       }
     });
   };
-
   const handleSubmit = async(e) => {
 
     e.preventDefault();
@@ -54,7 +56,37 @@ const CreateTeam = () => {
     };
     
     const token = localStorage.getItem('token')
-    const res = await axios.post("http://localhost:5000/team/create",data,{
+
+    if(userinfo.plan == 'Free'){
+      if(selectedMembers.length > 10){
+        toast.error("You have reached the maximum number of members allowed for the free plan")
+        return
+      }
+    }
+
+    if(userinfo.plan == 'Basic'){
+      if(selectedMembers.length > 50){
+        toast.error("You have reached the maximum number of members allowed for the Basic plan")
+        return
+      }
+    }
+
+    if(userinfo.teams.length>5 && userinfo.plan=='Free'){
+      toast.error("You have reached the maximum number of teams allowed for the current plan")
+      return
+    }
+
+    console.log(userinfo.teams);
+    if(userinfo.teams.length>20 && userinfo.plan=='Basic'){
+      toast.error("You have reached the maximum number of teams allowed for the current plan")
+      return
+    }
+
+    toast.info("Team is being created please wait")
+
+
+
+    const res = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/team/${organizationId}/create`,data,{
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -63,18 +95,24 @@ const CreateTeam = () => {
     
 
     if(res.status){
-        toast.success("Team successfully created")
+        toast.success(res.data.message)
+        router.push(`/organization/${organizationId}/teams/all`);
+    }
+    else{
+      toast.error(res.data.message)
     }
     console.log('Team Created:', res);
   };
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <Loader/>;
   }
 
   if (isError) {
     return <div>Error: {error.message}</div>;
   }
+
+  
 
   return (
     <div className="min-h-screen flex mt-1 bg-gray-100">
@@ -104,7 +142,7 @@ const CreateTeam = () => {
                 </tr>
               </thead>
               <tbody>
-                {members.map((member) => (
+                {members.response.map((member) => (
                   <tr key={member.id} className="border-b border-gray-200">
                     <td className="px-4 py-2">
                       <input

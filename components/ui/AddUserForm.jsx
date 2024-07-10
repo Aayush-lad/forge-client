@@ -62,7 +62,7 @@ const AddUserForm = ({onAdd,type="org",teamId=null}) => {
               <input
                 type="email"
                 id="email"
-                className="p-2 border border-gray-200 rounded-md"
+                className="p-2 border border-black rounded-md"
               />
 
             
@@ -76,7 +76,7 @@ const AddUserForm = ({onAdd,type="org",teamId=null}) => {
               </label>
               <select
                 id="role"
-                className="p-2 border border-gray-200 rounded-md"
+                className="p-2 border border-black rounded-md"
               >
                 <option value="Admin" className="p-1S">
                   Admin

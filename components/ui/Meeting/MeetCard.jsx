@@ -15,10 +15,10 @@ const MeetCard = ({ className, img, title, description, handleClick }) => {
       onClick={handleClick}
     >
       <div className="flex-center  size-12 rounded-[10px] ">
-        <Image src={img} alt="meeting" width={27} height={27} />
+        <Image src={img} alt="meeting" width={100} height={107} />
       </div>
       
-      <div className="flex flex-col gap-2">
+      <div className="flex flex-col gap-2 text-white">
         <h1 className="text-2xl font-bold">{title}</h1>
         <p className="text-lg font-normal">{description}</p>
       </div>

@@ -24,10 +24,15 @@ const Welcome = ({ step, setStep,closeModal }) => {
     const fetchMembers = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:5000/organization/${orgId}/members`
+          `${process.env.NEXT_PUBLIC_API_URL}/organization/${orgId}/members`,
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("token")}`,
+            },
+          }
         );
         console.log(response);
-        const memberOptions = response.data.map((member) => ({
+        const memberOptions = response.data.response.map((member) => ({
           value: member._id,
           label: member.username,
         }));
@@ -43,7 +48,7 @@ const Welcome = ({ step, setStep,closeModal }) => {
     const fetchTeams = async () => {
       const token = localStorage.getItem('token')
       try {
-        const response = await axios.get(`http://localhost:5000/team/${orgId}/teams`,{
+        const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/team/${orgId}/teams`,{
           headers:{
             Authorization:`Bearer ${token}`
           }
@@ -81,7 +86,7 @@ const Welcome = ({ step, setStep,closeModal }) => {
     };
 
     const res = await axios.post(
-      "http://localhost:5000/organization/create",
+      `${process.env.NEXT_PUBLIC_API_URL}/organization/create`,
       data,
       {
         headers: {
@@ -115,7 +120,7 @@ const Welcome = ({ step, setStep,closeModal }) => {
     console.log(data);
 
     const res = await axios.post(
-      "http://localhost:5000/organization/add-member",
+      `${process.env.NEXT_PUBLIC_API_URL}/organization/add-member`,
       data,
       {
         headers: {
@@ -133,7 +138,7 @@ const Welcome = ({ step, setStep,closeModal }) => {
 
     try {
       const organizationId = orgId;
-      const response = await axios.post("http://localhost:5000/team/create", {
+      const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/team/${organizationId}/create`, {
         name,
         organizationId,
         memberIds: selectedMembers.map((member) => member.value),
@@ -155,7 +160,7 @@ const Welcome = ({ step, setStep,closeModal }) => {
     const { name, description, startDate, endDate, status, selectedTeams } = data;
 
     try {
-      const response = await axios.post('http://localhost:5000/project/create', {
+      const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/project/${orgId}/create`, {
         name,
         description,
         startDate,
@@ -163,6 +168,10 @@ const Welcome = ({ step, setStep,closeModal }) => {
         status,
         organizationId:orgId,
         teamId: selectedTeams.map(team => team.value),
+      },{
+        headers:{
+          Authorization:`Bearer ${localStorage.getItem('token')}`
+        }
       });
 
       console.log('Project created:', response.data);
@@ -199,7 +208,7 @@ const Welcome = ({ step, setStep,closeModal }) => {
               <input
                 type="text"
                 id="organisationName"
-                className="p-2 border border-gray-200 rounded-md"
+                className="p-2 border border-gray-500 rounded-md"
               />
               <button
                 className="bg-green-500 text-white rounded-md p-2"
@@ -265,7 +274,7 @@ const Welcome = ({ step, setStep,closeModal }) => {
                   className="bg-green-500 text-white rounded-md text-center p-2"
                   onClick={() => setStep(3)}
                 >
-                  Add Later
+                 Next
                 </button>
               </div>
             </form>
@@ -312,7 +321,7 @@ const Welcome = ({ step, setStep,closeModal }) => {
                   options={members}
                   value={selectedMembers}
                   onChange={setSelectedMembers}
-                  className="text-black"
+                  className="text-black border-1 border-gray-500"
                 />
               </div>
               <button
@@ -350,7 +359,7 @@ const Welcome = ({ step, setStep,closeModal }) => {
         <div>
           <label>Name</label>
           <input
-          className="label ml-1 p-1"
+          className="label ml-1 p-1 border border-gray-400"
             type="text"
             {...register('name', { required: true })}
           />
@@ -358,7 +367,7 @@ const Welcome = ({ step, setStep,closeModal }) => {
         <div className="flex flex-col gap-1">
           <label>Start Date</label>
           <input
-           className="label ml-1 p-1"
+           className="label ml-1 p-1 border border-gray-400"
             type="date"
             {...register('startDate')}
           />
@@ -366,14 +375,14 @@ const Welcome = ({ step, setStep,closeModal }) => {
         <div className="flex flex-col gap-1">
           <label >End Date</label>
           <input
-           className="label ml-1 p-1"
+           className="label ml-1 p-1 border border-gray-400"
             type="date"
             {...register('endDate')}
           />
         </div>
         <div>
           <label>Status</label>
-          <select {...register('status')}  className="label ml-1 p-1">
+          <select {...register('status')}  className="label ml-1 p-1 border border-green-400">
             <option value="Not Started">Not Started</option>
             <option value="In Progress">In Progress</option>
             <option value="Completed">Completed</option>

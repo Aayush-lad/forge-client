@@ -6,21 +6,36 @@ import Papa from 'papaparse';
 import { toast } from 'react-toastify';
 import { useRouter } from 'next/navigation';
 import axios from 'axios';
+import { useUser } from 'context/UserContext';
 
 const CreateOrganization = () => {
   const [organization, setOrganization] = useState('');
   const [csvData, setCsvData] = useState([]);
+  const {userinfo} = useUser();
   
   const router = useRouter();
   const queryClient = useQueryClient();
 
   const createOrganization = async (data) => {
-    console.log("Form Data:", data);
+
     const token = localStorage.getItem('token');
     
     try {
+
+      if(userinfo?.roles?.length >2 && userinfo.plan == 'Free'){
+        toast.error("You have reached the maximum number of organizations allowed for the free plan")
+        return {message:"sub overlimit", status:true}
+
+      }
+      else if(userinfo?.roles?.length >10 && userinfo.plan == 'Basic'){
+        toast.error("You have reached the maximum number of organizations allowed for the Basic plan")
+        return {message:"sub overlimit", status:true}
+      }
+      
+
+      
       const res = await axios.post(
-        'http://localhost:5000/organization/create-org',
+        `${process.env.NEXT_PUBLIC_API_URL}/organization/create-org`,
         data,
         {
           headers: {
@@ -28,8 +43,10 @@ const CreateOrganization = () => {
           },
         }
       );
-      console.log("Server Response:", res.data);
-      return res.data; // Ensure the response data is returned correctly
+
+
+
+      return res.data; 
     } catch (error) {
       console.error("Error creating organization:", error);
       throw error; // Re-throw the error for further handling
@@ -41,14 +58,16 @@ const CreateOrganization = () => {
   
     mutationFn: createOrganization,
     onSuccess: (data) => {
-      console.log("Mutation Success Data:", data);
+   
       if (data && data?.organization?._id) {
         queryClient.invalidateQueries(['organizationlist']);
         toast.success("Organization successfully created")
         router.push(`/organization/${data.organization._id}`);
       } else {
+        if(!data.status){
         toast.error("Please check the data it might be invalid")
-        console.error("Invalid response data:", data);
+
+        }
       }
     },
     onError: (error) => {
@@ -66,7 +85,8 @@ const CreateOrganization = () => {
     Papa.parse(file, {
       header: true,
       complete: (results) => {
-        console.log(results);
+
+  
         toast.success("file uploaded successfully")
         setCsvData(results.data);
         

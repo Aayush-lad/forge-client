@@ -9,7 +9,7 @@ import { Pagination } from '@/components/ui/pagination'
 
 const fetchOrganizations = async () => {
   const token = localStorage.getItem('token');
-  const res = await axios.get('http://localhost:5000/organization/', {
+  const res = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/organization/`, {
     headers: {
       Authorization: `Bearer ${token}`,
     },
@@ -19,7 +19,7 @@ const fetchOrganizations = async () => {
 
 const deleteOrganization = async (id) => {
   const token = localStorage.getItem('token');
-  await axios.delete(`http://localhost:5000/organization/${id}`, {
+  await axios.delete(`${process.env.NEXT_PUBLIC_API_URL}/organization/${id}`, {
     headers: {
       Authorization: `Bearer ${token}`,
     },
@@ -54,7 +54,7 @@ const AllOrganizationsPage = () => {
   const mutation = useMutation({
     mutationFn: deleteOrganization,
     onSuccess: (d) => {
-      console.log("Mutation Success Data:", d);
+
       queryClient.invalidateQueries(['organizationlist']);  
     },
     onError: (error) => {
@@ -93,8 +93,7 @@ const AllOrganizationsPage = () => {
         className="mb-4"
       />
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        {console.log(data)}
-        {console.log(filteredOrgs)}
+  
 
 
 

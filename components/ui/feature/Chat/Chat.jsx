@@ -4,7 +4,7 @@ import io from 'socket.io-client';
 const Chat = ({ chatRoomId, userId }) => {
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState('');
-  const socket = io('http://localhost:5000'); // Adjust the URL as needed
+  const socket = io('${process.env.NEXT_PUBLIC_API_URL}'); // Adjust the URL as needed
 
   useEffect(() => {
     if (!chatRoomId) return;

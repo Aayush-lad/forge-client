@@ -3,7 +3,7 @@ import io from 'socket.io-client';
 
 const ChatList = ({ userId, onSelectChat }) => {
   const [chats, setChats] = useState([]);
-  const socket = io('http://localhost:5000');
+  const socket = io(process.env.BASE_URL);
 
   useEffect(() => {
     // Fetch chat rooms or groups from server (mock implementation)

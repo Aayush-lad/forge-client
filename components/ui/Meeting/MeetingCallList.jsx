@@ -7,18 +7,9 @@ import {useGetCalls} from "../../../hooks/useGetCalls";
 
 
 const MeetingCallList = () => {
-  // Fetch calls of users
-
-
-
-
-
-
-
-
 
   const fetchCalls = async () => {
-    const response = await axios.get("http://localhost:5000/meeting/get-meetings", {
+    const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/meeting/get-meetings`, {
       headers: {
         Authorization: `Bearer ${localStorage.getItem("token")}`
       }
