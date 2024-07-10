@@ -71,8 +71,8 @@ const Sidebar = ({ openSide, setOpen }) => {
       url: "https://img.icons8.com/?size=100&id=105326&format=png&color=40C057",
       subcategories: [
         ...data.map(org => ({
-          name: org.name,
-          href: `/organization/${org._id}`,
+          name: org?.name,
+          href: `/organization/${org?._id}`,
           url: "https://img.icons8.com/?size=100&id=w3f4X2RBkgO2&format=png&color=40C057",
           onClick: () => {
             localStorage.setItem('currentOrganization', JSON.stringify(org));
@@ -161,10 +161,10 @@ const Sidebar = ({ openSide, setOpen }) => {
                   </div>
                   <AccordionWrapper open={item.id === index}>
                     {item.subcategories.map((sub) => (
-                      <AccordionItem key={sub.name} href={sub.href} onClick={sub.onClick}>
+                      <AccordionItem key={sub?.name} href={sub.href} onClick={sub.onClick}>
                         <div className='flex gap-2'>
                           <Image width={20} height={12} src={`${sub.url}`} alt="L" />
-                          {sub.name}
+                          {sub?.name}
                         </div>
                       </AccordionItem>
                     ))}
@@ -175,7 +175,7 @@ const Sidebar = ({ openSide, setOpen }) => {
             <div className='flex items-center flex-row gap-2 w-full h-full mx-auto flex-1 mt-[20px] border rounded-md border-white text-white'>
               <p className='mx-3 mt-2'>Current Organization</p>
               <div className='border border-white rounded-md p-3 m-2 text-white mx-2 w-fit items-center justify-center text-md bg-green-500 ml-3'>
-                {JSON.parse(localStorage.getItem('currentOrganization')).name ?? "No Organization"}
+                {JSON.parse(localStorage.getItem('currentOrganization'))?.name ?? "No Organization"}
               </div>
             </div>
           </div>

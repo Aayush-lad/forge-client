@@ -54,10 +54,10 @@ const UserDashboard = ({ userInfo }) => {
             key={project._id}
             className="mb-4 p-4 border rounded-lg bg-gray-50"
           >
-            <h3 className="text-xl font-semibold mb-2">{project.name}</h3>
+            <h3 className="text-xl font-semibold mb-2">{project?.name}</h3>
             <div className="text-gray-700">
               <p className="mb-1">
-                <strong>Status:</strong> {project.status}
+                <strong>Status:</strong> {project?.status}
               </p>
               <p className="mb-1">
                 <strong>Start Date:</strong>{" "}
@@ -80,7 +80,7 @@ const UserDashboard = ({ userInfo }) => {
         <h2 className="text-2xl font-semibold mb-4">Teams</h2>
         {teams.map((team) => (
           <div key={team._id} className="mb-4 p-4 border rounded-lg bg-gray-50">
-            <h3 className="text-xl font-semibold mb-2">{team.name}</h3>
+            <h3 className="text-xl font-semibold mb-2">{team?.name}</h3>
             <div className="text-gray-700">
               <p>
                 <strong>Members:</strong> {team.members.length}
@@ -97,7 +97,7 @@ const UserDashboard = ({ userInfo }) => {
           <div key={role._id} className="mb-4 p-4 border rounded-lg bg-gray-50">
             <div className="text-gray-700">
               <p className="mb-1">
-                <strong>Organization:</strong> {role.organizationId.name}
+                <strong>Organization:</strong> {role.organizationId?.name}
               </p>
               <p>
                 <strong>Role:</strong> {role.role}
