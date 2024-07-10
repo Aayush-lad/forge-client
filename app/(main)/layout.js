@@ -3,7 +3,7 @@ import React ,{useEffect, useState} from 'react'
 import Sidebar from '@/components/ui/Sidebar'
 import Header from '@/components/ui/Header'
 import { useRouter } from 'next/navigation'
-import { AuthProvider } from 'context/AuthContext'
+import { AuthProvider } from '@/lib/context/AuthContext'
 
 
 

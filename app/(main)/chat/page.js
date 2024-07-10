@@ -4,7 +4,7 @@ import io from "socket.io-client";
 import axios from "axios";
 import { ChatList, MessageBox, Input } from "react-chat-elements";
 import "react-chat-elements/dist/main.css";
-import { useUser } from "context/UserContext";
+import {useUser} from "@/lib/context/UserContext"
 import EmojiPicker from "emoji-picker-react";
 import Loader from "@/components/ui/Loader";
 

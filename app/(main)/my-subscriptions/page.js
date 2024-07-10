@@ -2,7 +2,7 @@
 import { useState } from 'react';
 import { loadStripe } from '@stripe/stripe-js';
 import axios from "axios"
-import { useUser } from '../../../context/UserContext';
+import { useUser } from"@/lib/context/UserContext";
 const plans = [
   {
     id: 1,

@@ -1,7 +1,7 @@
 "use server"
 
 import { StreamClient } from "@stream-io/node-sdk"
-import {useUser} from "../context/UserContext"
+import {useUser} from "@/lib/context/UserContext"
 
 const apiSecret = process.env.STREAM_SECRET_KEY;
 const apiKey = process.env.NEXT_PUBLIC_STREAM_API_KEY;

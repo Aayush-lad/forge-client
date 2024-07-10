@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import { toast } from 'react-toastify';
-import { useUser } from 'context/UserContext';
+import { useUser } from"@/lib/context/UserContext";
 import { useParams, useRouter } from 'next/navigation';
 import Loader from '@/components/ui/Loader';
 

@@ -1,5 +1,5 @@
 "use client"
-import { useUser } from 'context/UserContext'
+import { useUser } from"@/lib/context/UserContext";
 import React,{useState} from 'react'
 import { useQuery,useMutation,useQueryClient } from '@tanstack/react-query';
 import axios from 'axios';

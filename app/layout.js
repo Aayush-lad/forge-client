@@ -3,9 +3,9 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
-import {UserProvider} from "../context/UserContext";
-import QueryProvider from '../context/QueryProvider';
-import {AuthProvider} from "../context/AuthContext";
+import {UserProvider} from "@/lib/context/UserContext";
+import QueryProvider from '@/lib/context/QueryProvider';
+import {AuthProvider} from "@/lib/context/AuthContext";
 
 const inter = Inter({ subsets: ["cyrillic"] });
 

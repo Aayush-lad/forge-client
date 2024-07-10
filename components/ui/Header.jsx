@@ -1,11 +1,8 @@
-"use client"
-import React, { useState, useEffect } from 'react';
+
+
 import Image from 'next/image';
-import { useRouter } from 'next/navigation';
-import { useQuery } from '@tanstack/react-query';
-import axios from 'axios';
-import Select from 'react-select';
-import { useUser } from 'context/UserContext';
+
+
 
 const Header = ({ openSide, setOpen, children }) => {
   

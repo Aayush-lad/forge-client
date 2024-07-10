@@ -1,6 +1,6 @@
 import React from 'react'
 
-import StreamVideoProvider from '../../../../../context/StreamClientProvider';
+import StreamVideoProvider from '@/lib/context/StreamClientProvider';
 
 const layout = ({children}) => {
   return (

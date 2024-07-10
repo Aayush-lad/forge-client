@@ -1,4 +1,4 @@
-import { AuthProvider } from 'context/AuthContext'
+import { AuthProvider } from '@/lib/context/AuthContext'
 import React from 'react'
 
 const layout = ({children}) => {

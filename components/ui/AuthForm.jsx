@@ -12,8 +12,8 @@ import Logo from './Logo';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 
-import {useAuth} from "../../context/AuthContext";
-import {useUser} from "../../context/UserContext";
+import {useAuth} from "@/lib/context/AuthContext";
+import {useUser} from "@/lib/context/UserContext";
 
 
 const AuthForm = () => {

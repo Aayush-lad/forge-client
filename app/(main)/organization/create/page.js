@@ -6,7 +6,7 @@ import Papa from 'papaparse';
 import { toast } from 'react-toastify';
 import { useRouter } from 'next/navigation';
 import axios from 'axios';
-import { useUser } from 'context/UserContext';
+import { useUser } from"@/lib/context/UserContext";
 
 const CreateOrganization = () => {
   const [organization, setOrganization] = useState('');

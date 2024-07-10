@@ -6,7 +6,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import MeetCard from './MeetCard';
 import MeetingModal from './MeetingModal';
 import { useStreamVideoClient } from '@stream-io/video-react-sdk';
-import { useUser } from '../../../context/UserContext';
+import { useUser } from '@/lib/context/UserContext';
 import Loader from '../Loader';
 import { Textarea } from '../textarea';
 import { toast } from "react-toastify";

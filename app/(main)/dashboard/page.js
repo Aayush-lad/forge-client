@@ -3,7 +3,7 @@ import Modal from "@/components/ui/Modal";
 import React, { useEffect, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import Welcome from "@/components/ui/Welcome";
-import { useUser } from "../../../context/UserContext";
+import { useUser } from"@/lib/context/UserContext";
 import Loader from "@/components/ui/Loader";
 
 const UserDashboard = ({ userInfo }) => {

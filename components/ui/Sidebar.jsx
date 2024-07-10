@@ -10,7 +10,7 @@ import { useQuery } from '@tanstack/react-query';
 import { toast } from 'react-toastify';
 import axios from 'axios';
 import { useParams, useRouter } from 'next/navigation';
-import { useUser } from 'context/UserContext';
+import { useUser } from '@/lib/context/UserContext';
 import Loader from './Loader';
 
 import "./scrollbar.css"
