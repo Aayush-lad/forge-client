@@ -38,7 +38,6 @@ const UserManagement = () => {
 
   const addOrgMember = async (data) => {
     const token = localStorage.getItem("token");
-    console.log(data);
     data.organizationId = organizationId
     const res =await axios.post(
       `${process.env.NEXT_PUBLIC_API_URL}/organization/add-member`,

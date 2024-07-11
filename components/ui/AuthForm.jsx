@@ -84,7 +84,7 @@ const AuthForm = () => {
         {isSignUp && (
           <div className='flex flex-col gap-2'>
             <label htmlFor="username">Name</label>
-            <Input id="username" type="text" {...register('username', { required: 'Name is required' })}  />
+            <Input id="username" type="text"  {...register('username', { required: 'Name is required' })}   />
             {errors.name && <FormMessage>{errors.name.message}</FormMessage>}
           </div>
         )}

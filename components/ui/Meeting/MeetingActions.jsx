@@ -132,7 +132,7 @@ const handleRecordingClick = () => {
 
   if (!client || !user) return <Loader />;
 
-  const meetingLink = `${process.env.NEXT_PUBLIC_NEXT_PUBLIC_API_URL}/meeting/${callDetail?.id}`;
+  const meetingLink = `${process.env.NEXT_PUBLIC_CLIENT_URL}/organization/${organizationId}/meeting/${callDetail?.id}`;
 
   return (
     <section className="grid grid-cols-1 mt-2 mx-2 flex-1 gap-5 md:grid-cols-2 xl:grid-cols-4">

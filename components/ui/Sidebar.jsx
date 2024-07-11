@@ -76,7 +76,7 @@ const Sidebar = ({ openSide, setOpen }) => {
           url: "https://img.icons8.com/?size=100&id=w3f4X2RBkgO2&format=png&color=40C057",
           onClick: () => {
             localStorage.setItem('currentOrganization', JSON.stringify(org));
-            router.push(`/organization/${org._id}`);
+            router.push(`/organization/${org?._id}`);
           }
         })),
         { name: "Create Organisation", href: `/organization/create`, url: "https://img.icons8.com/android/24/40C057/plus.png" },
