@@ -55,7 +55,7 @@ const RenderForm = () => {
 
       // Append file to FormData if exists
 
-      if (responses.file.value instanceof File) {
+      if (responses.file && responses.file.value instanceof File) {
        
         formData.append('file',responses.file.value);
       }
@@ -164,7 +164,7 @@ const RenderForm = () => {
               {element.type === 'select' && (
                 <select
                   className="border border-gray-300 p-2 rounded w-full focus:ring-indigo-500 focus:border-indigo-500"
-                  onChange={(e) => handleChange(element.id, e.target.value,element.label)}
+                  onChange={(e) => {console.log(e.target.value);handleChange(element.id, e.target.value,element.label)}}
                   required={element.required}
                 >
                   <option value="">Select an option</option>
