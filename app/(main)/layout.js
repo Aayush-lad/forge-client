@@ -24,7 +24,7 @@ const Layout = ({children}) => {
             <Header openSide={openSide} setOpen={setOpen}>
             </Header>
           </header>
-          <div className={`transition-all duration-500 ${openSide ? 'ml-[300px]' : 'ml-1'} h-screen overflow-y-scroll `}>
+          <div className={`transition-all duration-500 ${openSide ? 'ml-[300px]' : 'ml-1'} `}>
               {children}
           </div>
         </main>
