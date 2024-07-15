@@ -5,12 +5,13 @@ import Select from "react-select";
 import axios from "axios"
 import { toast } from 'react-toastify';
 import {useUser} from '@/lib/context/UserContext';
+import { useParams } from 'next/navigation';
 
 
 const AddUserForm = ({onAdd,type="org",teamId=null}) => {
 
-    const {organization} = useUser()
-    const orgId = organization._id
+    const {organizationId} = useParams()
+    const orgId = organizationId
     
 
     const handleSubmit = async(e)=>{
