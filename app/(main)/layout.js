@@ -14,7 +14,7 @@ const Layout = ({children}) => {
     return (
 
       <AuthProvider>
-              <div className="flex">
+              <div className="flex max-h-screen overflow-y-scroll">
         <aside className="fixed top-0 left-0 h-screen z-[1000000]  overflow-y-scroll">
           <Sidebar openSide={openSide} setOpen={setOpen} className="fixed" />
         </aside>
@@ -24,7 +24,7 @@ const Layout = ({children}) => {
             <Header openSide={openSide} setOpen={setOpen}>
             </Header>
           </header>
-          <div className={`transition-all duration-500 ${openSide ? 'ml-[300px]' : 'ml-1'}`}>
+          <div className={`transition-all duration-500 ${openSide ? 'ml-[300px]' : 'ml-1'} h-screen overflow-y-scroll `}>
               {children}
           </div>
         </main>
