@@ -9,6 +9,8 @@ import {
   Form,
   FormMessage,
 } from "@/components/ui/form"
+import { useQueryClient } from "@tanstack/react-query";
+import { useUser } from "@/lib/context/UserContext";
 
 
 const Welcome = ({ step, setStep,closeModal }) => {
@@ -19,6 +21,10 @@ const Welcome = ({ step, setStep,closeModal }) => {
   const form = useForm();
   const { register, handleSubmit, control ,reset, formState: { errors } } = form
   const [teams, setTeams] = useState([]);
+  const queryClient = useQueryClient();
+  const {toggleInvalidate} = useUser();
+
+
 
   useEffect(() => {
     const fetchMembers = async () => {
@@ -99,6 +105,7 @@ const Welcome = ({ step, setStep,closeModal }) => {
       setOrgId(res.data.organization._id);
     }
     toast.success(res.data.message);
+    queryClient.invalidateQueries(['organizationlist']);
   };
 
   const handleStep2 = async (e) => {
@@ -180,6 +187,7 @@ const Welcome = ({ step, setStep,closeModal }) => {
       toast.success(response.data.message);
       reset();
       // Redirect or show success message
+      toggleInvalidate((prev)=> !prev)
       closeModal()
     } catch (error) {
       console.error('Error creating project:', error);
@@ -189,7 +197,7 @@ const Welcome = ({ step, setStep,closeModal }) => {
   return (
     <>
       {step === 1 && (
-        <div className="flex">
+        <div className="flex z-[50000000]">
           <div className="p-4">
             <h1 className="text-2xl font-bold mb-4">
               Welcome to your dashboard
@@ -218,7 +226,7 @@ const Welcome = ({ step, setStep,closeModal }) => {
               </button>
             </form>
           </div>
-          <div>
+          <div className="hidden md:block">
             <Image
               src="/organisation_banner.gif"
               alt="Banner"
@@ -230,7 +238,7 @@ const Welcome = ({ step, setStep,closeModal }) => {
       )}
 
       {step == 2 && (
-        <div className="flex">
+        <div className="flex z-[5000000000]">
           <div className="p-4">
             <h1 className="text-2xl font-bold mb-4">
               Great!! Now lets add some members
@@ -279,7 +287,7 @@ const Welcome = ({ step, setStep,closeModal }) => {
               </div>
             </form>
           </div>
-          <div>
+          <div className="hidden md:block">
             <Image
               src="/organisation_banner.gif"
               alt="Banner"
@@ -291,7 +299,7 @@ const Welcome = ({ step, setStep,closeModal }) => {
       )}
 
       {step == 3 && (
-        <div className="flex">
+        <div className="flex z-[500000000000]">
           <div className="p-4">
             <h1 className="text-2xl font-bold mb-4">Build your Team </h1>
             <p className="mb-4">
@@ -332,7 +340,7 @@ const Welcome = ({ step, setStep,closeModal }) => {
               </button>
             </form>
           </div>
-          <div>
+          <div className="hidden md:block">
             <Image
               src="/organisation_banner.gif"
               alt="Banner"
